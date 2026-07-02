@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alte Brücke — 하이델베르크의 구 다리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --stone:   #2C2825;
+    --sand:    #C4956A;
+    --river:   #5B8FA8;
+    --parchment: #F5EFE4;
+    --gold:    #D4A853;
+    --light:   #FAF6F0;
+    --muted:   #8B7D6B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--light);
+    color: var(--stone);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(44,40,37,0.95);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 60px;
+    border-bottom: 1px solid rgba(212,168,83,0.3);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--gold); letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--parchment); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-family: 'Source Serif 4', serif; font-weight: 300;
+    opacity: 0.85; transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(to bottom, rgba(44,40,37,0.55) 0%, rgba(44,40,37,0.2) 50%, rgba(44,40,37,0.75) 100%),
+      url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Heidelberg_Alte_Brücke_1.jpg/1280px-Heidelberg_Alte_Brücke_1.jpg') center/cover no-repeat;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 5vw 60px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    color: var(--gold); font-size: 0.78rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    font-family: 'Source Serif 4', serif; font-weight: 300;
+    margin-bottom: 1.4rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 900; line-height: 1.0;
+    color: #fff;
+    margin-bottom: 0.4rem;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--gold);
+  }
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 300; font-style: italic;
+    color: rgba(245,239,228,0.85);
+    margin-bottom: 2.5rem;
+  }
+  .hero-desc {
+    max-width: 560px;
+    color: rgba(245,239,228,0.8);
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-scroll {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.4rem; color: rgba(245,239,228,0.55);
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* ── ARCH DIVIDER ── */
+  .arch-divider {
+    width: 100%; text-align: center;
+    padding: 1rem 0;
+    overflow: hidden;
+  }
+  .arch-divider svg { width: 260px; height: 40px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5vw; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    display: block;
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--river); font-weight: 600; margin-bottom: 1rem;
+    font-family: 'Source Serif 4', serif;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 700;
+    margin-bottom: 0.7rem; color: var(--stone);
+  }
+  p { margin-bottom: 1.2rem; color: #3D3530; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── HISTORY ── */
+  #history { background: var(--parchment); }
+  .timeline {
+    margin-top: 3rem;
+    border-left: 2px solid var(--sand);
+    padding-left: 2.5rem;
+    display: flex; flex-direction: column; gap: 2.5rem;
+  }
+  .tl-item { position: relative; }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -2.75rem; top: 0.45rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--sand);
+  }
+  .tl-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--sand); line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ── ARCHITECTURE ── */
+  #architecture { background: var(--light); }
+  .arch-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .arch-card {
+    background: var(--parchment);
+    border: 1px solid rgba(196,149,106,0.3);
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .arch-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(44,40,37,0.1);
+  }
+  .arch-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: rgba(196,149,106,0.25);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .arch-card .stat {
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--river);
+    margin-bottom: 0.4rem; font-weight: 600;
+  }
+  .arch-card .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── MONKEY STATUE ── */
+  #monkey { background: var(--stone); color: var(--parchment); }
+  #monkey h2 { color: #fff; }
+  #monkey p { color: rgba(245,239,228,0.8); }
+  .monkey-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 2rem;
+  }
+  .monkey-quote {
+    border-left: 3px solid var(--gold);
+    padding-left: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--gold); line-height: 1.55;
+    margin-top: 2rem;
+  }
+  .monkey-img {
+    border: 1px solid rgba(212,168,83,0.3);
+    overflow: hidden;
+    position: relative;
+  }
+  .monkey-img img {
+    width: 100%; height: 340px; object-fit: cover;
+    display: block; filter: sepia(20%) contrast(1.05);
+    transition: filter 0.4s;
+  }
+  .monkey-img:hover img { filter: sepia(0%) contrast(1); }
+  .monkey-img .caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(44,40,37,0.7);
+    color: rgba(245,239,228,0.75);
+    font-size: 0.75rem; padding: 0.6rem 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--parchment); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 12px; margin-top: 2.5rem;
+  }
+  .gallery-grid img {
+    width: 100%; height: 220px; object-fit: cover;
+    display: block; transition: transform 0.35s, filter 0.35s;
+    filter: sepia(10%);
+  }
+  .gallery-grid img:hover { transform: scale(1.03); filter: sepia(0%); }
+  .gallery-grid .wide { grid-column: span 2; }
+  .gallery-grid .wide img { height: 280px; }
+
+  /* ── VISIT ── */
+  #visit { background: var(--light); }
+  .visit-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; margin-top: 3rem;
+  }
+  .info-block {
+    background: var(--parchment);
+    padding: 2rem 2.2rem;
+    border-top: 3px solid var(--gold);
+  }
+  .info-block h3 { color: var(--stone); margin-bottom: 1rem; }
+  .info-row {
+    display: flex; justify-content: space-between;
+    padding: 0.6rem 0; border-bottom: 1px solid rgba(196,149,106,0.2);
+    font-size: 0.9rem;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .label { color: var(--muted); font-weight: 300; }
+  .info-row .value { font-weight: 600; text-align: right; }
+
+  /* ── MAP EMBED ── */
+  .map-wrap {
+    margin-top: 2.5rem; overflow: hidden;
+    border: 1px solid rgba(196,149,106,0.3);
+  }
+  .map-wrap iframe {
+    width: 100%; height: 300px; border: none; display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--stone);
+    color: rgba(245,239,228,0.55);
+    text-align: center;
+    padding: 3rem 5vw;
+    font-size: 0.82rem; letter-spacing: 0.06em;
+  }
+  footer .ft-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--gold);
+    margin-bottom: 0.8rem; font-style: italic;
+  }
+  footer .ft-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.2rem; }
+  footer a { color: rgba(245,239,228,0.45); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--gold); }
+  footer .credit { margin-top: 2rem; font-size: 0.73rem; opacity: 0.4; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .monkey-layout, .visit-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid .wide { grid-column: span 2; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Alte Brücke</a>
+  <ul class="nav-links">
+    <li><a href="#history">역사</a></li>
+    <li><a href="#architecture">구조</a></li>
+    <li><a href="#monkey">원숭이 동상</a></li>
+    <li><a href="#gallery">갤러리</a></li>
+    <li><a href="#visit">방문 정보</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Heidelberg · Germany · Est. 1788</p>
+  <h1 class="hero-title">Alte<br><em>Brücke</em></h1>
+  <p class="hero-subtitle">하이델베르크의 오래된 다리</p>
+  <p class="hero-desc">
+    네카어 강을 가로지르는 238년의 역사. 아홉 개의 아치가 떠받치는 이 사암 다리는 하이델베르크의 심장이자, 괴테가 사랑한 낭만의 무대입니다.
+  </p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    아래로 스크롤
+  </div>
+</section>
+
+<!-- ARCH DIVIDER -->
+<div class="arch-divider">
+  <svg viewBox="0 0 260 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 38 L20 38 Q30 5 50 5 Q70 5 80 38 L90 38 Q100 5 120 5 Q140 5 150 38 L160 38 Q170 5 190 5 Q210 5 220 38 L240 38 Q250 5 260 5" stroke="#C4956A" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <line x1="0" y1="39" x2="260" y2="39" stroke="#C4956A" stroke-width="0.5" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- HISTORY -->
+<section id="history">
+  <div class="section-inner">
+    <span class="section-label">Geschichte · 역사</span>
+    <h2>아홉 번의 다리,<br>하나의 전설</h2>
+    <p>알트 브뤼케는 오늘날의 모습이 되기까지 무려 아홉 번에 걸쳐 건설과 파괴를 반복했습니다. 로마 시대부터 네카어 강의 이 지점에 도하 시설이 있었다는 기록이 전해지며, 현재의 석조 다리는 1786년에서 1788년 사이에 선제후 카를 테오도르의 명으로 완성되었습니다.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1248</div>
+        <h3>최초의 석조 다리</h3>
+        <p>가장 오래된 형태의 석조 교량이 이 자리에 세워졌습니다. 이후 홍수와 전쟁으로 반복적으로 파괴되었습니다.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1689</div>
+        <h3>팔츠 계승 전쟁의 파괴</h3>
+        <p>루이 14세의 프랑스군이 하이델베르크를 점령하며 다리를 완전히 파괴했습니다. 도시 전체가 잿더미가 된 비극적 사건입니다.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1788</div>
+        <h3>현재의 석조 다리 완공</h3>
+        <p>선제후 카를 테오도르가 붉은 사암으로 된 현재의 다리를 완공했습니다. 다리 위에 선제후의 이름을 딴 카를-테오도르-브뤼케라는 공식 이름이 붙었습니다.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1945</div>
+        <h3>제2차 세계대전의 상흔</h3>
+        <p>후퇴하던 독일군이 연합군의 진격을 막기 위해 다리 일부를 폭파했습니다. 전쟁 직후 복구 공사를 통해 원래의 모습을 되찾았습니다.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">현재</div>
+        <h3>보행자 전용 역사 유산</h3>
+        <p>오늘날 알트 브뤼케는 보행자와 자전거만 통행할 수 있습니다. 연간 수백만 명의 관광객이 찾는 하이델베르크의 상징이자 독일에서 가장 아름다운 다리 중 하나로 손꼽힙니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCH DIVIDER -->
+<div class="arch-divider" style="background:var(--parchment);">
+  <svg viewBox="0 0 260 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 38 L20 38 Q30 5 50 5 Q70 5 80 38 L90 38 Q100 5 120 5 Q140 5 150 38 L160 38 Q170 5 190 5 Q210 5 220 38 L240 38 Q250 5 260 5" stroke="#5B8FA8" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <line x1="0" y1="39" x2="260" y2="39" stroke="#5B8FA8" stroke-width="0.5" opacity="0.3"/>
+  </svg>
+</div>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-inner">
+    <span class="section-label">Architektur · 건축</span>
+    <h2>붉은 사암으로 빚은<br>아홉 개의 아치</h2>
+    <p>다리는 하이델베르크 지역 특산 붉은 사암(Buntsandstein)으로 지어졌습니다. 하중을 우아하게 분산시키는 아홉 개의 반원형 아치는 18세기 바로크 토목 기술의 정수를 보여줍니다. 동쪽 끝에는 두 개의 탑과 문이 있는 고풍스러운 성문이 다리의 시작을 알립니다.</p>
+
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-card-num">01</div>
+        <div class="stat">전체 길이</div>
+        <div class="val">200m</div>
+        <p style="font-size:0.88rem;">네카어 강을 가로지르는 총 연장 200미터의 석조 구조물.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-num">02</div>
+        <div class="stat">아치 수</div>
+        <div class="val">9개</div>
+        <p style="font-size:0.88rem;">하중을 분산하는 9개의 반원형 아치. 각 스팬 약 20미터.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-num">03</div>
+        <div class="stat">완공 연도</div>
+        <div class="val">1788년</div>
+        <p style="font-size:0.88rem;">선제후 카를 테오도르의 명으로 약 2년에 걸쳐 완공.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-num">04</div>
+        <div class="stat">소재</div>
+        <div class="val">붉은 사암</div>
+        <p style="font-size:0.88rem;">오덴발트 지역산 붉은 사암(Buntsandstein). 시간이 지나며 독특한 황금빛으로 변색.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-num">05</div>
+        <div class="stat">게이트 타워</div>
+        <div class="val">2기</div>
+        <p style="font-size:0.88rem;">동쪽 입구의 두 탑은 14세기에 지어진 중세 도시 성벽의 일부.</p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-num">06</div>
+        <div class="stat">통행 방식</div>
+        <div class="val">보행자 전용</div>
+        <p style="font-size:0.88rem;">현재는 차량 통행이 금지되어 도보와 자전거만 이용 가능.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONKEY STATUE -->
+<section id="monkey">
+  <div class="section-inner">
+    <span class="section-label" style="color:var(--gold);">Brückenaffe · 다리의 원숭이</span>
+    <h2>거울을 든 원숭이,<br>그 의미는?</h2>
+    <div class="monkey-layout">
+      <div>
+        <p>알트 브뤼케에서 가장 독특한 조각상은 단연 원숭이(Brückenaffe)입니다. 다리의 동쪽 성문 바로 옆에 자리 잡은 이 청동 원숭이는 거울을 들고 앉아 관람객을 맞이합니다.</p>
+        <p>원숭이가 들고 있는 거울은 자기 자신을 돌아보라는 메시지입니다. "하이델베르크를 방문했다고 우쭐대기 전에, 먼저 자신의 모습을 보라"는 뜻이 담겼다고 전해집니다. 원숭이 곁에는 두 마리의 쥐 조각도 있는데, 쥐의 머리를 만지면 재물운이 온다는 속설이 있습니다.</p>
+        <p>원숭이의 손가락을 만지면 다시 하이델베르크를 찾게 된다는 전설이 있어, 관광객들이 너도나도 청동 손가락을 만지고 갑니다. 덕분에 원숭이의 손은 반들반들하게 닳아 있습니다.</p>
+        <div class="monkey-quote">
+          "거울에 비친 나를 보라.<br>하이델베르크는 그대를 기억할 것이다."
+        </div>
+      </div>
+      <div class="monkey-img">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Heidelberg_-_Alte_Brücke_-_Brückenaffe.jpg/640px-Heidelberg_-_Alte_Brücke_-_Brückenaffe.jpg"
+             alt="알트 브뤼케 원숭이 동상" loading="lazy">
+        <div class="caption">Brückenaffe — 1979년 설치된 청동 원숭이 조각상</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <span class="section-label">Galerie · 갤러리</span>
+    <h2>사진으로 보는<br>알트 브뤼케</h2>
+    <p>네카어 강의 빛에 따라 매 순간 다른 표정을 보여주는 알트 브뤼케의 모습들입니다.</p>
+    <div class="gallery-grid">
+      <div class="wide">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Heidelberg_Alte_Brücke_1.jpg/1280px-Heidelberg_Alte_Brücke_1.jpg"
+             alt="알트 브뤼케 전경" loading="lazy">
+      </div>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Heidelberg_-_Alte_Brücke_-_Brückentor.jpg/640px-Heidelberg_-_Alte_Brücke_-_Brückentor.jpg"
+             alt="브뤼케 게이트" loading="lazy">
+      </div>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Heidelberg_alte_bruecke_floodlight.jpg/640px-Heidelberg_alte_bruecke_floodlight.jpg"
+             alt="야경" loading="lazy">
+      </div>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Heidelberger_Schloss_und_alte_Brücke.jpg/1280px-Heidelberger_Schloss_und_alte_Brücke.jpg"
+             alt="하이델베르크 성과 다리" loading="lazy">
+      </div>
+      <div class="wide">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Heidelberg_-_Alte_Brücke_Westseite.jpg/1280px-Heidelberg_-_Alte_Brücke_Westseite.jpg"
+             alt="서쪽 전망" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="section-inner">
+    <span class="section-label">Besuch · 방문 정보</span>
+    <h2>알트 브뤼케를<br>직접 걸어보세요</h2>
+    <p>알트 브뤼케는 연중 24시간 개방되며, 입장료는 없습니다. 해 질 무렵 다리 위에서 바라보는 하이델베르크 성의 실루엣은 평생 잊지 못할 풍경입니다.</p>
+
+    <div class="visit-grid">
+      <div class="info-block">
+        <h3>기본 정보</h3>
+        <div class="info-row">
+          <span class="label">공식 명칭</span>
+          <span class="value">Karl-Theodor-Brücke</span>
+        </div>
+        <div class="info-row">
+          <span class="label">별칭</span>
+          <span class="value">Alte Brücke (구 다리)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">개방 시간</span>
+          <span class="value">연중 24시간</span>
+        </div>
+        <div class="info-row">
+          <span class="label">입장료</span>
+          <span class="value">무료</span>
+        </div>
+        <div class="info-row">
+          <span class="label">통행</span>
+          <span class="value">보행자 · 자전거</span>
+        </div>
+        <div class="info-row">
+          <span class="label">위치</span>
+          <span class="value">Heidelberg 구시가지</span>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <h3>찾아가는 법</h3>
+        <div class="info-row">
+          <span class="label">기차</span>
+          <span class="value">하이델베르크 중앙역 → 트램 21번</span>
+        </div>
+        <div class="info-row">
+          <span class="label">트램</span>
+          <span class="value">Rathaus/Bergbahn 정류장 하차</span>
+        </div>
+        <div class="info-row">
+          <span class="label">도보</span>
+          <span class="value">구시가지 마르크트 광장에서 5분</span>
+        </div>
+        <div class="info-row">
+          <span class="label">주차</span>
+          <span class="value">구시가지 내 주차 불가 (근처 주차장 이용)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">최적 방문 시간</span>
+          <span class="value">일출 직후 또는 일몰 무렵</span>
+        </div>
+        <div class="info-row">
+          <span class="label">추천 계절</span>
+          <span class="value">봄 (4–5월), 가을 (9–10월)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2592.3!2d8.7074!3d49.4121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797c10437a3e619%3A0x5ce90823cbfed63c!2sAlte%20Br%C3%BCcke%2C%20Heidelberg!5e0!3m2!1sko!2sde!4v1"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="알트 브뤼케 지도">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-title">Alte Brücke · 1788</div>
+  <p>Karl-Theodor-Brücke, Heidelberg, Baden-Württemberg, Deutschland</p>
+  <div class="ft-links">
+    <a href="#history">역사</a>
+    <a href="#architecture">건축 구조</a>
+    <a href="#monkey">원숭이 동상</a>
+    <a href="#gallery">갤러리</a>
+    <a href="#visit">방문 정보</a>
+  </div>
+  <p class="credit">이미지 출처: Wikimedia Commons (CC-BY-SA) · 교육 목적으로 제작된 비상업적 사이트입니다.</p>
+</footer>
+
+</body>
+</html>
